@@ -43,7 +43,10 @@ namespace Data.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException?.Message);
+                Console.WriteLine("HATA:");
+                Console.WriteLine(ex.Message); 
+                Console.WriteLine(ex.InnerException?.Message); 
+                throw;
             }
             
 

@@ -19,6 +19,7 @@ namespace Data
                 {
                     new User
                     {
+                      
                         UserName = "Admin",
                         UserEmail = "admin@example.com",
                         UserPassword = "admin123",
@@ -28,6 +29,7 @@ namespace Data
                     },
                     new User
                     {
+                       
                         UserName = "User",
                         UserEmail = "user@example.com",
                         UserPassword = "user123",
@@ -40,6 +42,47 @@ namespace Data
                 context.User.AddRange(users);
                 context.SaveChanges();
             }
+            if (!context.Categories.Any())
+            {
+                var categories = new List<Category>
+                {
+                    new Category
+                    {
+
+                        CategoryId = 1,
+                        CategoryName = "Protein"
+                    },
+                    new Category
+                    {
+
+                        CategoryId = 2,
+                        CategoryName = "Hacim"
+                    },
+                    new Category
+                    {
+
+                        CategoryId = 3,
+                        CategoryName = "Zayıflama"
+                    },
+                    new Category
+                    {
+
+                        CategoryId = 4,
+                        CategoryName = "Enerji"
+                    },
+                    new Category
+                    {
+
+                        CategoryId = 5,
+                        CategoryName = "Giyim"
+                    }
+
+                };
+
+                context.Categories.AddRange(categories);
+                context.SaveChanges();
+            }
+
         }
     }
 }

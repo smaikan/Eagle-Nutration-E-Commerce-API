@@ -27,7 +27,16 @@ namespace Data.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasKey(e => e.CategoryId);
+
+                entity.Property(e => e.CategoryId)
+                    .ValueGeneratedNever();  
+
+                entity.Property(e => e.CategoryName).IsRequired();
+            });
+
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
