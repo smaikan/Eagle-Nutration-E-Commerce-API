@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core.DTOs.UserDTOs
+{
+    public class UserCreateDTO
+    {
+        [Required]
+        [MaxLength(50)]
+        public string UserName { get; set; }
+
+        
+
+        [Required]
+        [EmailAddress]
+        public string UserEmail { get; set; }
+
+        [Required]
+        
+        public string Password { get; set; }
+    }
+}
