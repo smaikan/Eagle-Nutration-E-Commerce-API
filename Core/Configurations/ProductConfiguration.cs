@@ -20,11 +20,15 @@ namespace Core.Configurations
             builder.Property(p => p.ProductName).IsRequired().HasMaxLength(100);
             builder.Property(p => p.ProductDescription).HasMaxLength(1000);
             
+<<<<<<< HEAD
 builder.Property(p => p.ProductAroma)
     .HasConversion(
         v => string.Join(",", v),
         v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
     );
+=======
+
+>>>>>>> c8e2fb5ef3fe48ae811ce257204a35ad1610721d
             builder.HasOne(p => p.Category)
                    .WithMany(c => c.Products)
                    .HasForeignKey(p => p.ProductCategoryId);

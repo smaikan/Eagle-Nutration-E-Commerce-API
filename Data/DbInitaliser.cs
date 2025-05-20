@@ -68,13 +68,18 @@ namespace Data
                     {
 
                         CategoryId = 4,
+<<<<<<< HEAD
                         CategoryName = "Performans"
+=======
+                        CategoryName = "Enerji"
+>>>>>>> c8e2fb5ef3fe48ae811ce257204a35ad1610721d
                     },
                     new Category
                     {
 
                         CategoryId = 5,
                         CategoryName = "Giyim"
+<<<<<<< HEAD
                     },new Category
                     {
 
@@ -83,6 +88,10 @@ namespace Data
                     }
 
 
+=======
+                    }
+
+>>>>>>> c8e2fb5ef3fe48ae811ce257204a35ad1610721d
                 };
 
                 context.Categories.AddRange(categories);

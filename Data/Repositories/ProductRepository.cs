@@ -29,7 +29,11 @@ namespace Data.Repositories
         public async Task<List<Product>> GetProductsByCategoryIdAsync(int categoryId)
         {
             return await _context.Products
+<<<<<<< HEAD
                 .Where(p => p.ProductCategoryId == categoryId).Include(p => p.Category)
+=======
+                .Where(p => p.ProductCategoryId == categoryId) 
+>>>>>>> c8e2fb5ef3fe48ae811ce257204a35ad1610721d
                 .ToListAsync();
         }
 
