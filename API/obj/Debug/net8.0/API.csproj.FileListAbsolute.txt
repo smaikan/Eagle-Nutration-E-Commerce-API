@@ -189,3 +189,4 @@ C:\Users\serha\OneDrive\Masaüstü\EAGLE NUTRATION\API\api\obj\Debug\net8.0\refi
 C:\Users\serha\OneDrive\Masaüstü\EAGLE NUTRATION\API\api\obj\Debug\net8.0\API.pdb
 C:\Users\serha\OneDrive\Masaüstü\EAGLE NUTRATION\API\api\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\serha\OneDrive\Masaüstü\EAGLE NUTRATION\API\api\obj\Debug\net8.0\ref\API.dll
+C:\Users\serha\OneDrive\Masaüstü\EAGLE NUTRATION\API\API\obj\Debug\net8.0\API.sourcelink.json

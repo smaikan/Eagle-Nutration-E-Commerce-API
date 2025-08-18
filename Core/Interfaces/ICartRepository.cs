@@ -12,6 +12,6 @@ namespace Core.Interfaces
         Task<bool> AddCartProductAsync(int id, int UserId, string saroma);
         Task<bool> RemoveCartProductAsync(int id, int CartId, string saroma);
         Task<bool> decreaseCartProductAsync(int id, int CartId, string saroma);
-        
+        Task<bool> EmptyCartAsync(int userId);
     }
 }

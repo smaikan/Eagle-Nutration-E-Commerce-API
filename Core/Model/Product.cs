@@ -23,7 +23,7 @@ namespace   Core.Model
         public int Stock { get; set; }
 
        
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
     }
 }

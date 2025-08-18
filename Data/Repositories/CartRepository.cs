@@ -76,7 +76,20 @@ namespace Data.Repositories
             return true;
         }
 
-        public async Task<bool> decreaseCartProductAsync(int productId, int userId, string? saroma ="")
+        public async Task<bool> EmptyCartAsync(int userId)
+{
+    var userCart = await GetCartAsync(userId);
+
+    if (userCart == null || !userCart.CartItems.Any())
+      {  return false; }
+
+    userCart.CartItems.Clear();
+
+    await _context.SaveChangesAsync();
+
+    return true;
+}
+        public async Task<bool> decreaseCartProductAsync(int productId, int userId, string? saroma = "")
         {
             var cart = await _context.Cart
                 .Include(c => c.CartItems)
@@ -85,9 +98,9 @@ namespace Data.Repositories
             if (cart == null)
                 return false;
 
- var productToRemove = cart.CartItems.FirstOrDefault(p => p.ProductId == productId &&
-            p.aroma.OrderBy(a => a).SequenceEqual(saroma.OrderBy(a => a)));
-            
+            var productToRemove = cart.CartItems.FirstOrDefault(p => p.ProductId == productId &&
+                       p.aroma.OrderBy(a => a).SequenceEqual(saroma.OrderBy(a => a)));
+
             if (productToRemove.Quantity <= 1)
             {
                 cart.CartItems.Remove(productToRemove);
@@ -97,7 +110,7 @@ namespace Data.Repositories
                 productToRemove.Quantity -= 1;
             }
 
-           
+
             await _context.SaveChangesAsync();
             return true;
         }

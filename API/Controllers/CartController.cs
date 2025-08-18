@@ -50,7 +50,7 @@ namespace API.Controllers
             return Ok("Ürün sepete eklendi.");
         }
 
-        
+
 
 
         [HttpDelete("remove")]
@@ -62,7 +62,7 @@ namespace API.Controllers
 
             return Ok("Ürün sepetten silindi.");
         }
-         [HttpDelete("decrease")]
+        [HttpDelete("decrease")]
         public async Task<IActionResult> DecreaseItemCart([FromQuery] int productId, [FromQuery] int userId, [FromQuery] string? aroma = "")
         {
             var removed = await _cartService.DecreaseCartItem(productId, userId, aroma);
@@ -70,6 +70,18 @@ namespace API.Controllers
                 return NotFound("Ürün eksilmedi.");
 
             return Ok("Ürün sepetten eksildi.");
+        }
+        [HttpDelete("empty")]
+        public async Task<IActionResult> EmptyCart(int userId)
+        {
+            var empty = await _cartService.EmptyCartAsync(userId);
+
+            if (!empty)
+            {
+                return NotFound("Sepet boşaltılamadı.");
+            }
+
+            return Ok("Sepet boşaltıldı.");
         }
     }
 }
