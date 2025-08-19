@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7aYq0H/B8RQ=",
+  "dgSpecHash": "DYbb+15cUro=",
   "success": true,
-  "projectFilePath": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\API\\api\\API.csproj",
+  "projectFilePath": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\api\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\serha\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\serha\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

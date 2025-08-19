@@ -13,12 +13,11 @@ namespace Core.DTOs.OrderDTOs
 
         [Required]
         public int ProductId { get; set; }
-
+        public string? ProductName { get; set; }
+        public string? ProductImage { get; set; }
         [Required]
         public int Quantity { get; set; }
-
         public string? Aroma { get; set; }
-
         [Required]
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice => UnitPrice * Quantity;

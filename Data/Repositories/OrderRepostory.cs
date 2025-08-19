@@ -22,9 +22,22 @@ namespace Core.Repositories
        
         public async Task<Order> CreateOrderAsync(Order order)
         {
-            await _context.Order.AddAsync(order);
-            await _context.SaveChangesAsync();
-            return order;  
+            try
+    {
+        await _context.Order.AddAsync(order);
+        await _context.SaveChangesAsync();
+        return order;
+    }
+    catch (Exception ex)
+    {
+        // Asıl hata genelde InnerException içindedir (SQL kaynaklı)
+        var innerMessage = ex.InnerException?.Message ?? "";
+        var fullMessage = $"SaveChanges hata: {ex.Message} " +
+                          (string.IsNullOrWhiteSpace(innerMessage) ? "" : $" | Inner: {innerMessage}");
+
+        // Burada ister logla ister fırlat
+        throw new Exception(fullMessage, ex);
+    }
         }
 
         

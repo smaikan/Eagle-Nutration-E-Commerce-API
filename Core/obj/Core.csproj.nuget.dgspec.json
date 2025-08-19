@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\API\\Core\\Core.csproj": {}
+    "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\api\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\API\\Core\\Core.csproj": {
+    "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\api\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\API\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\api\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\API\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\api\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\serha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\API\\Core\\obj\\",
+        "outputPath": "C:\\Users\\serha\\OneDrive\\Masaüstü\\EAGLE NUTRATION\\api\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
