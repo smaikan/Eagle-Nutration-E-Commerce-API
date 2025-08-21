@@ -20,7 +20,6 @@ namespace Data.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comment{ get; set; }
         public DbSet<Order> Order { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Promotion> Promotion{ get; set; }
@@ -41,7 +40,6 @@ namespace Data.Data
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
-            modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
 
 

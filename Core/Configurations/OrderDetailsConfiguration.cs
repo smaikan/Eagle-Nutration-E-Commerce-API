@@ -13,17 +13,7 @@ namespace Core.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderDetail> builder)
         {
-            builder.HasKey(od => od.OrderDetailId);
-            builder.Property(u => u.OrderDetailId)
-                   .ValueGeneratedOnAdd();
-
-            builder.Property(od => od.Quantity)
-                   .IsRequired();
-
-            builder.Property(od => od.UnitPrice)
-                   .IsRequired();
-
-          
+         
         }
     }
 }

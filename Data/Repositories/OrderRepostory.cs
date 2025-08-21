@@ -13,81 +13,89 @@ namespace Core.Repositories
     {
         private readonly AppDbContext _context;
 
-       
+
         public OrderRepository(AppDbContext context)
         {
             _context = context;
         }
 
-       
+
         public async Task<Order> CreateOrderAsync(Order order)
         {
             try
-    {
-        await _context.Order.AddAsync(order);
-        await _context.SaveChangesAsync();
-        return order;
-    }
-    catch (Exception ex)
-    {
-        // Asıl hata genelde InnerException içindedir (SQL kaynaklı)
-        var innerMessage = ex.InnerException?.Message ?? "";
-        var fullMessage = $"SaveChanges hata: {ex.Message} " +
-                          (string.IsNullOrWhiteSpace(innerMessage) ? "" : $" | Inner: {innerMessage}");
+            {
+                await _context.Order.AddAsync(order);
+                await _context.SaveChangesAsync();
+                return order;
+            }
+            catch (Exception ex)
+            {
+                // Asıl hata genelde InnerException içindedir (SQL kaynaklı)
+                var innerMessage = ex.InnerException?.Message ?? "";
+                var fullMessage = $"SaveChanges hata: {ex.Message} " +
+                                  (string.IsNullOrWhiteSpace(innerMessage) ? "" : $" | Inner: {innerMessage}");
 
-        // Burada ister logla ister fırlat
-        throw new Exception(fullMessage, ex);
-    }
+                // Burada ister logla ister fırlat
+                throw new Exception(fullMessage, ex);
+            }
         }
 
-        
+
         public async Task<Order> GetOrderByIdAsync(int id)
         {
             return await _context.Order
-                .Include(o => o.OrderDetails) 
-                .Include(o => o.User)          
-                .FirstOrDefaultAsync(o => o.OrderId == id);  
+                .Include(o => o.OrderDetails)
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(o => o.OrderId == id);
         }
 
-       
+
         public async Task<List<Order>> GetOrdersByUserIdAsync(int userId)
         {
             return await _context.Order
-                .Where(o => o.UserId == userId)  
-                .Include(o => o.OrderDetails)    
-                .Include(o => o.User)            
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrderDetails)
+                .Include(o => o.User)
                 .ToListAsync();
         }
 
-        
+
         public async Task<List<Order>> GetAllOrdersAsync()
         {
             return await _context.Order
-                .Include(o => o.OrderDetails)  
-                .Include(o => o.User)         
+                .Include(o => o.OrderDetails)
+                .Include(o => o.User)
                 .ToListAsync();
         }
 
-        
 
-        
+
+
         public async Task<bool> DeleteOrderAsync(int id)
         {
             var order = await _context.Order.FindAsync(id);
             if (order == null) return false;
 
-            _context.Order.Remove(order);  
-            await _context.SaveChangesAsync();
+            _context.Order.Remove(order);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine("DB HATASI: " + ex.InnerException?.Message);
+                throw;
+            }
             return true;
         }
 
-     
+
         public async Task<bool> UpdateOrderStatusAsync(int orderId, string newStatus)
         {
             var order = await _context.Order.FindAsync(orderId);
             if (order == null) return false;
 
-            order.OrderStatus = newStatus; 
+            order.OrderStatus = newStatus;
             await _context.SaveChangesAsync();
             return true;
         }

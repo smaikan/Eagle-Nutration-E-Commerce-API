@@ -177,45 +177,6 @@ namespace Data.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("Core.Model.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
-
-                    b.Property<string>("Aroma")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("Core.Model.Payment", b =>
                 {
                     b.Property<int>("PaymentId")
@@ -403,8 +364,50 @@ namespace Data.Migrations
                     b.HasOne("Core.Model.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.OwnsMany("Core.Model.OrderDetail", "OrderDetails", b1 =>
+                        {
+                            b1.Property<int>("OrderDetailId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("OrderDetailId"));
+
+                            b1.Property<string>("Aroma")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("ProductId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("ProductImage")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("ProductName")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("int");
+
+                            b1.Property<decimal>("TotalPrice")
+                                .HasColumnType("decimal(18,2)");
+
+                            b1.Property<decimal>("UnitPrice")
+                                .HasColumnType("decimal(18,2)");
+
+                            b1.HasKey("OrderDetailId");
+
+                            b1.HasIndex("OrderId");
+
+                            b1.ToTable("OrderDetail");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
 
                     b.OwnsOne("Core.Model.ShippingAddress", "ShippingAddress", b1 =>
                         {
@@ -435,17 +438,12 @@ namespace Data.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
+                    b.Navigation("OrderDetails");
+
                     b.Navigation("ShippingAddress")
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Core.Model.OrderDetail", b =>
-                {
-                    b.HasOne("Core.Model.Order", null)
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("Core.Model.Payment", b =>
@@ -509,11 +507,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Core.Model.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Core.Model.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("Core.Model.Product", b =>
