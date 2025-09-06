@@ -73,36 +73,18 @@ public async Task<IActionResult> CreateBulk([FromBody] List<ProductCreateDTO> dt
             return NoContent();
         }
 
-        
+
         [HttpPut("Sell/{id}")]
-        public async Task<IActionResult> SellProduct(int id)
+        public async Task<IActionResult> SellProduct(int id, int piece)
         {
-            var product = await _productService.GetByIdAsync(id);
-            if (product == null)
-                return NotFound("Ürün bulunamadı.");
+            bool Selled = await _productService.DecreaseStock(id, piece);
+            if (Selled == false)
+                return NotFound("Sorun oluştu");
 
-            if (product.Stock <= 0)
-                return BadRequest("Ürün stoğu tükenmiş.");
-
-            product.Stock--;
-
-            
-            var updatedProduct = new ProductUpdateDTO
-            {
-                ProductName = product.Name,
-                ProductDescription = product.Description,
-                ProductPrice = product.Price,
-                Stock = product.Stock,
-                ProductCategoryId = product.ProductCategoryId
-            };
-
-            var success = await _productService.UpdateAsync(id, updatedProduct);
-            if (!success)
-                return BadRequest("Stok güncellenemedi.");
-
-            return Ok(product);
+            return Ok(Selled);
         }
-
+            
+            
         
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

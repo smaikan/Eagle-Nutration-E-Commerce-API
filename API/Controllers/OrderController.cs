@@ -79,7 +79,7 @@ namespace Core.Controllers
         }
 
      
-        [HttpPut("{orderId}")]
+        [HttpPut("updatestatus")]
         public async Task<IActionResult> UpdateOrderStatusAsync(int orderId, [FromBody] string newStatus)
         {
             var result = await _orderService.UpdateOrderStatusAsync(orderId, newStatus);

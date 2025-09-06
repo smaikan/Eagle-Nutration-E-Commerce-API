@@ -15,5 +15,6 @@ namespace Core.Interfaces
         Task<User?> CreateAsync(User user);
         Task DeleteAsync(User user);
         Task<UpdateDTO?> UpdateAsync(int id, UpdateDTO user);
+        Task<bool> UpdateRole(int id, string role);
     }
 }

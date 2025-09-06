@@ -45,16 +45,16 @@ namespace Data.Repositories
             }
         }
 
-        public async Task<UpdateDTO?> UpdateAsync(int id,UpdateDTO updatedUser)
+        public async Task<UpdateDTO?> UpdateAsync(int id, UpdateDTO updatedUser)
         {
             var existingUser = await GetByIdAsync(id);
             if (existingUser == null)
-       { return null;}
-        
-        existingUser.UserName = updatedUser.UserName;
-    existingUser.UserEmail = updatedUser.UserEmail;
-    existingUser.UserPhone = updatedUser.UserPhone;
-    existingUser.UserPassword = updatedUser.Password;
+            { return null; }
+
+            existingUser.UserName = updatedUser.UserName;
+            existingUser.UserEmail = updatedUser.UserEmail;
+            existingUser.UserPhone = updatedUser.UserPhone;
+            existingUser.UserPassword = updatedUser.Password;
             if (updatedUser.UserAddress != null)
             {
                 if (existingUser.UserAddress == null)
@@ -65,7 +65,7 @@ namespace Data.Repositories
                 existingUser.UserAddress.Neighbor = updatedUser.UserAddress.Neighbor;
                 existingUser.UserAddress.Addressc = updatedUser.UserAddress.Address;
 
-    }
+            }
             else
             {
 
@@ -88,6 +88,16 @@ namespace Data.Repositories
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> UpdateRole(int id, string role)
+        {
+            var user = await _context.User.FindAsync(id);
+            if (user == null) return false;
+            user.Role = role;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
     }
 
 }

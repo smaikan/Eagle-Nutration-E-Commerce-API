@@ -16,5 +16,6 @@ namespace Services.Interfaces
         Task<User> CreateAsync(UserCreateDTO dto);
         Task<bool> DeleteAsync(int id);
         Task<UpdateDTO?> UpdateAsync(int id, UpdateDTO user);
+        Task<bool> UpdateRole(int id, string role);
     }
 }

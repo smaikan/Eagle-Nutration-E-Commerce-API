@@ -26,10 +26,10 @@ namespace Services.Services
         {
             var products = await _productRepository.GetAllAsync();
             if (products == null)
-               { throw new NotFoundException("Ürün bulunamadı."); }
+            { throw new NotFoundException("Ürün bulunamadı."); }
             return _mapper.Map<List<ProductDTO>>(products);
         }
-        
+
         public async Task<List<ProductDTO>> GetByCategoryIdAsync(int categoryId)
         {
             var products = await _productRepository.GetProductsByCategoryIdAsync(categoryId);
@@ -62,27 +62,31 @@ namespace Services.Services
             if (product == null)
                 throw new Exception("Ürün bulunamadı.");
 
-            
+
             if (product.Stock <= 0)
                 throw new Exception("Ürün stoğu tükenmiş.");
 
-            
+
             product.Stock--;
 
-            
+
             await _productRepository.UpdateAsync(product);
 
-            
+
             return true;
         }
         public async Task<bool> DeleteAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
-            if (product == null) return false;  
+            if (product == null) return false;
 
             await _productRepository.DeleteAsync(id);
             return true;
         }
 
+         public async Task<bool> DecreaseStock(int id, int piece)
+        {
+            return await _productRepository.DecreaseStock(id, piece);
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        // api/users
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -24,7 +24,7 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        // api/users/{id}
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -35,7 +35,7 @@ namespace API.Controllers
             return Ok(user);
         }
 
-        // api/users/login
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDTO loginDto)
         {
@@ -50,7 +50,7 @@ namespace API.Controllers
             }
         }
 
-        // api/users
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateDTO createDto)
         {
@@ -66,7 +66,7 @@ namespace API.Controllers
                 UserPassword = result.UserPassword
             };
             return Ok(userDTO);
-    }
+        }
         [HttpPut]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateDTO user)
         {
@@ -74,11 +74,11 @@ namespace API.Controllers
             if (result == null)
                 return BadRequest("Kullanıcı oluşturulamadı.");
 
-            
-            return Ok(user);
-    }
 
-        //  api/users/{id}
+            return Ok(user);
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -88,5 +88,15 @@ namespace API.Controllers
 
             return Ok("Kullanıcı başarıyla silindi.");
         }
+       [HttpPut("role")]
+        public async Task<IActionResult> UpdateRole(int id, string role)
+        {
+            var result = await _userService.UpdateRole(id, role);
+            if (result == false)
+            {
+                return BadRequest("Rol Güncellenemedi.");
+            }
+           return Ok(result);
+       }
     }
 }

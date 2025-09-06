@@ -15,5 +15,6 @@ namespace Services.Interfaces
         Task<List<ProductDTO>> GetByCategoryIdAsync(int categoryId);
         Task<bool> UpdateAsync(int id, ProductUpdateDTO dto);
         Task<bool> DeleteAsync(int id);
+        Task<bool> DecreaseStock(int id, int piece);
     }
 }

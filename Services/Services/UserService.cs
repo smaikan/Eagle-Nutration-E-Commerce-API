@@ -64,7 +64,7 @@ namespace Services.Services
         }
         public async Task<UpdateDTO> UpdateAsync(int id, UpdateDTO user)
         {
-           
+
             return await _userRepository.UpdateAsync(id, user);
         }
 
@@ -76,5 +76,11 @@ namespace Services.Services
             await _userRepository.DeleteAsync(user);
             return true;
         }
+
+        public async Task<bool> UpdateRole(int id, string role)
+        {
+           return await _userRepository.UpdateRole(id, role);
+        }
+
     }
 }

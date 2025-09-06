@@ -21,7 +21,7 @@ namespace Data.Repositories
             return await _context.Products.Include(p => p.Category).ToListAsync();
         }
 
-       
+
         public async Task<Product> GetByIdAsync(int id)
         {
             return await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.ProductId == id);
@@ -45,16 +45,16 @@ namespace Data.Repositories
             catch (Exception ex)
             {
                 Console.WriteLine("HATA:");
-                Console.WriteLine(ex.Message); 
-                Console.WriteLine(ex.InnerException?.Message); 
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InnerException?.Message);
                 throw;
             }
-            
+
 
             return product;
         }
 
-        
+
         public async Task<bool> UpdateAsync(Product product)
         {
             if (product == null)
@@ -67,7 +67,7 @@ namespace Data.Repositories
             return result > 0;
         }
 
-       
+
         public async Task DeleteAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);
@@ -76,6 +76,22 @@ namespace Data.Repositories
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> DecreaseStock(int id, int piece)
+        {
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+                return false;
+
+            if (product.Stock < piece)
+                return false;
+
+            product.Stock -= piece;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
